@@ -1,0 +1,239 @@
+
+:root {
+  --papel: #fbfbf6;
+  --cuadricula: #dbe6f1;
+  --margen: #eaa6a6;
+  --tinta: #22324f;
+  --birome-azul: #1f4fb8;
+  --birome-roja: #c4303b;
+  --resaltador: #fff08a;
+  --grafito: #5b6270;
+
+  --manuscrita: 'Kalam', 'Comic Sans MS', 'Segoe Print', cursive;
+  --texto: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--tinta);
+  font-family: var(--texto);
+  background-color: var(--papel);
+  
+  background-image:
+    linear-gradient(to right, transparent 47px, var(--margen) 47px, var(--margen) 49px, transparent 49px),
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+}
+
+.juego {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--manuscrita);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 10vw, 3.4rem);
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+
+.estado {
+  margin: 0;
+  min-height: 3em;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.estado.final {
+  font-family: var(--manuscrita);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0 0.3em;
+  background: linear-gradient(transparent 55%, var(--resaltador) 55%, var(--resaltador) 90%, transparent 90%);
+}
+
+
+
+.marcador {
+  display: flex;
+  gap: 28px;
+}
+
+.jugador {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.jugador.activo {
+  border-bottom-color: currentColor;
+}
+
+#jugador-X { color: var(--birome-roja); }
+#jugador-O { color: var(--birome-azul); }
+
+.marca {
+  font-family: var(--manuscrita);
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.reserva {
+  display: flex;
+  gap: 4px;
+  min-width: 44px;
+}
+
+.mini {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+
+
+
+.tablero {
+  position: relative;
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.lineas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--tinta);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.punto {
+  position: relative;
+  place-self: center;
+  width: 64%;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--manuscrita);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 13vw, 3.4rem);
+  line-height: 1;
+  color: var(--tinta);
+}
+
+
+.punto:empty::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--tinta);
+  transition: transform 0.15s;
+}
+
+.punto:not(:disabled):empty:hover::before {
+  transform: scale(1.4);
+}
+
+.ficha-x,
+.ficha-o {
+  background: var(--papel);
+  box-shadow: 0 0 0 3px var(--papel);
+}
+
+.ficha-x { color: var(--birome-roja); }
+.ficha-o { color: var(--birome-azul); }
+
+.punto.seleccionada {
+  outline: 3px dashed currentColor;
+  outline-offset: 4px;
+}
+
+.punto.destino::before {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 3px dashed var(--grafito);
+}
+
+.punto.ganadora {
+  background: var(--resaltador);
+  box-shadow: 0 0 0 3px var(--resaltador);
+}
+
+.punto:disabled {
+  cursor: default;
+}
+
+.punto:focus-visible,
+.reiniciar:focus-visible,
+.reglas summary:focus-visible {
+  outline: 3px solid var(--birome-azul);
+  outline-offset: 4px;
+}
+
+
+
+.reiniciar {
+  font: inherit;
+  font-size: 1rem;
+  padding: 10px 20px;
+  color: var(--tinta);
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  border-radius: 6px 10px 7px 12px; 
+  cursor: pointer;
+}
+
+.reiniciar:hover {
+  background: var(--resaltador);
+}
+
+.reglas {
+  width: 100%;
+  max-width: 34em;
+  line-height: 1.55;
+}
+
+.reglas summary {
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.reglas p {
+  margin: 0.6em 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

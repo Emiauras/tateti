@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ta-te-ti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="juego">
+    <h1 class="titulo">Ta-te-ti</h1>
+
+    <p id="estado" class="estado" aria-live="polite"></p>
+
+    <div class="marcador">
+      <div class="jugador" id="jugador-X">
+        <span class="marca marca-x">X</span>
+        <span class="reserva" id="reserva-X" aria-label="Fichas de X sin colocar"></span>
+      </div>
+      <div class="jugador" id="jugador-O">
+        <span class="marca marca-o">O</span>
+        <span class="reserva" id="reserva-O" aria-label="Fichas de O sin colocar"></span>
+      </div>
+    </div>
+
+    <div class="tablero" id="tablero">
+     
+      <svg class="lineas" viewBox="0 0 300 300" aria-hidden="true">
+        <line x1="50" y1="50" x2="250" y2="50" />
+        <line x1="50" y1="150" x2="250" y2="150" />
+        <line x1="50" y1="250" x2="250" y2="250" />
+        <line x1="50" y1="50" x2="50" y2="250" />
+        <line x1="150" y1="50" x2="150" y2="250" />
+        <line x1="250" y1="50" x2="250" y2="250" />
+        <line x1="50" y1="50" x2="250" y2="250" />
+        <line x1="250" y1="50" x2="50" y2="250" />
+      </svg>
+      
+    </div>
+
+    <button type="button" id="reiniciar" class="reiniciar">Empezar de nuevo</button>
+
+    <details class="reglas">
+      <summary>Cómo se juega</summary>
+      <p>Cada jugador tiene tres fichas. Por turnos, colocan una ficha en un punto vacío.</p>
+      <p>Cuando las seis fichas están en el tablero, en cada turno movés una de las tuyas a un punto vecino libre, siguiendo las líneas.</p>
+      <p>Gana quien pone sus tres fichas en línea: horizontal, vertical o diagonal.</p>
+    </details>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
